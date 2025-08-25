@@ -1,3 +1,5 @@
+# https://bird-species-model.onrender.com
+# uvicorn main:app --host 0.0.0.0 --port 5000
 from transformers import AutoImageProcessor, AutoModelForImageClassification
 from PIL import Image
 import torch
@@ -39,3 +41,8 @@ async def predict(file: UploadFile = File(...)):
         return {"label": label, "confidence": confidence}
     except Exception as e:
         return {"error": str(e)}
+
+@app.get("/test")
+async def health():
+    return {"status" : "OK"}
+
